@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eng. Rewan ElBadry | تعليم Claude AI والأتمتة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Tajawal:wght@300;400;500;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#543237;
+    --plum-deep:#2B1A1D;
+    --ink:#171113;
+    --charcoal:#211D1E;
+    --gold:#C7A77A;
+    --gold-light:#E8D8BF;
+    --gold-deep:#9A713B;
+    --cream:#EEE5DA;
+    --offwhite:#F8F5F0;
+    --taupe:#B89D86;
+    --muted:#a8968c;
+    --line:rgba(199,167,122,.18);
+    --card:rgba(255,255,255,.035);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Tajawal',sans-serif;
+    background:var(--ink);
+    color:var(--cream);
+    line-height:1.8;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(84,50,55,.75), transparent 60%),
+      radial-gradient(700px 500px at 0% 40%, rgba(84,50,55,.35), transparent 60%),
+      radial-gradient(600px 400px at 100% 100%, rgba(154,113,59,.12), transparent 60%);
+  }
+  .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
+  .en{font-family:'Playfair Display',serif;direction:ltr;unicode-bidi:isolate}
+  .gold-text{
+    background:linear-gradient(100deg,var(--gold-deep),var(--gold-light) 45%,var(--gold) 70%,var(--gold-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* NAV */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .brand{display:flex;align-items:center;gap:12px}
+  .mark{
+    width:42px;height:42px;border-radius:50%;
+    border:1px solid var(--gold);display:grid;place-items:center;
+    font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;
+  }
+  .brand .en{font-size:18px;letter-spacing:.5px;color:var(--offwhite)}
+  .nav-cta{
+    font-size:14px;color:var(--gold-light);text-decoration:none;
+    border:1px solid var(--line);padding:9px 20px;border-radius:40px;transition:.3s;
+  }
+  .nav-cta:hover{border-color:var(--gold);background:rgba(199,167,122,.08)}
+
+  /* HERO */
+  .hero{text-align:center;padding:70px 0 60px}
+  .eyebrow{
+    display:inline-flex;gap:10px;align-items:center;font-size:13px;letter-spacing:2px;
+    color:var(--gold);border:1px solid var(--line);padding:7px 18px;border-radius:40px;margin-bottom:30px;
+    font-family:'DM Sans',sans-serif;direction:ltr;
+  }
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .hero-name{font-size:clamp(40px,7vw,84px);font-weight:600;line-height:1.1;margin-bottom:22px}
+  .hero-name em{font-style:italic;font-weight:500}
+  .hero h2{font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--offwhite);margin-bottom:14px}
+  .hero p{max-width:640px;margin:0 auto;color:var(--muted);font-size:18px}
+  .divider{width:120px;height:1px;margin:44px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+
+  /* TOGGLE */
+  .section-head{text-align:center;margin:30px 0 34px}
+  .section-head h3{font-size:30px;font-weight:800;color:var(--offwhite)}
+  .section-head p{color:var(--muted)}
+  .toggle{
+    display:inline-flex;margin-top:22px;padding:5px;border-radius:40px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);
+  }
+  .toggle button{
+    font-family:inherit;font-size:15px;border:0;background:transparent;color:var(--muted);
+    padding:9px 24px;border-radius:40px;cursor:pointer;transition:.3s;
+  }
+  .toggle button.on{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:var(--ink);font-weight:700}
+
+  /* CARDS */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .card{
+    --mx:50%;--my:50%;
+    position:relative;border-radius:22px;padding:34px 28px 28px;
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+    border:1px solid var(--line);cursor:pointer;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .4s;
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+    background:radial-gradient(380px circle at var(--mx) var(--my),rgba(199,167,122,.13),transparent 60%);
+  }
+  .card:hover::before{opacity:1}
+  .card:hover{transform:translateY(-6px);border-color:rgba(199,167,122,.45)}
+  .card.featured{
+    background:linear-gradient(180deg,rgba(84,50,55,.85),rgba(43,26,29,.9));
+    border-color:rgba(199,167,122,.55);
+    box-shadow:0 30px 80px -30px rgba(199,167,122,.35);
+  }
+  .card.selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 30px 80px -25px rgba(199,167,122,.5)}
+  .badge{
+    position:absolute;top:18px;left:18px;font-size:12px;font-weight:700;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--plum-deep);
+    padding:4px 14px;border-radius:30px;
+  }
+  .num{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:15px;margin-bottom:6px;text-align:right}
+  .card h4{font-size:24px;font-weight:800;color:var(--offwhite);margin-bottom:18px}
+  .price{display:flex;align-items:baseline;gap:8px;margin-bottom:18px}
+  .price .from{font-size:14px;color:var(--muted)}
+  .price .amount{font-family:'Playfair Display',serif;font-size:52px;font-weight:600;line-height:1}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .chip{
+    font-size:13px;padding:5px 12px;border-radius:30px;
+    background:rgba(199,167,122,.08);border:1px solid var(--line);color:var(--gold-light);
+  }
+  .inherit{
+    font-size:14px;color:var(--gold);padding:10px 14px;border-radius:12px;margin-bottom:14px;
+    background:rgba(199,167,122,.06);border:1px dashed rgba(199,167,122,.3);
+  }
+  .card p.desc{color:#cbbdb3;font-size:15.5px;margin-bottom:16px}
+  ul.feats{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:26px;flex:1}
+  ul.feats li{display:flex;gap:10px;font-size:15.5px;color:#e4d9cd}
+  ul.feats li::before{
+    content:"";flex:0 0 18px;height:18px;margin-top:5px;border-radius:50%;
+    background:rgba(199,167,122,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C7A77A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/11px no-repeat;
+  }
+  .pick{
+    font-family:inherit;font-size:16px;font-weight:700;width:100%;padding:14px;border-radius:14px;cursor:pointer;
+    border:1px solid var(--gold);background:transparent;color:var(--gold-light);transition:.3s;
+  }
+  .card.featured .pick,.pick:hover,.card.selected .pick{background:linear-gradient(135deg,var(--gold-light),var(--gold));color:var(--plum-deep);border-color:transparent}
+
+  /* COMPARE */
+  .compare{display:none;overflow-x:auto;border-radius:22px;border:1px solid var(--line);background:var(--card)}
+  table{width:100%;border-collapse:collapse;min-width:720px}
+  th,td{padding:15px 18px;text-align:center;border-bottom:1px solid rgba(199,167,122,.1);font-size:15px}
+  th:first-child,td:first-child{text-align:right;color:#d9cbbf}
+  thead th{color:var(--offwhite);font-size:17px;font-weight:800;background:rgba(84,50,55,.35)}
+  thead th small{display:block;font-family:'Playfair Display',serif;color:var(--gold);font-size:22px;font-weight:600}
+  td .y{color:var(--gold);font-size:18px}
+  td .n{color:#5d4f4a}
+  tbody tr:hover{background:rgba(199,167,122,.04)}
+  .col-feat{background:rgba(84,50,55,.22)}
+
+  /* LIVE */
+  .live{
+    margin:70px 0 30px;border-radius:26px;padding:46px 40px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,rgba(84,50,55,.7),rgba(33,29,30,.9));
+    border:1px solid rgba(199,167,122,.3);
+    display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;
+  }
+  .live-dot{
+    width:84px;height:84px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--gold);position:relative;
+    font-family:'DM Sans',sans-serif;font-weight:600;color:var(--gold);letter-spacing:2px;font-size:14px;
+  }
+  .live-dot::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(199,167,122,.4);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.35);opacity:0}}
+  .live h3{font-size:26px;font-weight:800;color:var(--offwhite);margin-bottom:8px}
+  .live p{color:#d6c7bb;font-size:17px}
+
+  .note{text-align:center;color:var(--muted);font-size:15px;margin:10px 0 120px}
+  .note b{color:var(--gold-light);font-weight:500}
+
+  /* SELECTION BAR */
+  .bar{
+    position:fixed;bottom:22px;left:50%;transform:translate(-50%,140%);z-index:20;
+    width:min(720px,calc(100% - 32px));
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:14px 16px 14px 22px;border-radius:20px;
+    background:rgba(33,25,27,.92);backdrop-filter:blur(14px);
+    border:1px solid rgba(199,167,122,.45);box-shadow:0 20px 60px -15px rgba(0,0,0,.7);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .bar.show{transform:translate(-50%,0)}
+  .bar .txt small{display:block;color:var(--muted);font-size:13px}
+  .bar .txt strong{color:var(--offwhite);font-size:17px}
+  .bar button{
+    font-family:inherit;font-weight:700;font-size:15px;border:0;cursor:pointer;white-space:nowrap;
+    padding:12px 22px;border-radius:14px;color:var(--plum-deep);
+    background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  }
+
+  footer{border-top:1px solid var(--line);padding:30px 0 40px;text-align:center;color:var(--muted);font-size:14px}
+  footer .en{color:var(--gold);font-size:17px;display:block;margin-bottom:4px}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:960px){
+    .grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+    .live{grid-template-columns:1fr;text-align:center;justify-items:center;padding:36px 24px}
+  }
+  @media (max-width:520px){
+    .nav-cta{display:none}
+    .bar{flex-direction:column;align-items:stretch;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="brand">
+      <div class="mark">R</div>
+      <span class="en">Eng. Rewan ElBadry</span>
+    </div>
+    <a class="nav-cta" href="#packages">الباقات</a>
+  </nav>
+
+  <header class="hero reveal">
+    <div class="eyebrow"><i></i>CLAUDE AI · AUTOMATION · TRAINING</div>
+    <h1 class="hero-name en gold-text">Eng. Rewan <em>ElBadry</em></h1>
+    <h2>تعليم Claude AI وأتمتة شغلك</h2>
+    <p>من أول إزاي تستخدم Claude صح، لحد نظام كامل شغال لوحدك على أدواتك.</p>
+    <div class="divider"></div>
+  </header>
+
+  <section id="packages">
+    <div class="section-head reveal">
+      <h3>عندي 3 باقات تقدر تختار منهم</h3>
+      <p>اضغط على الباقة اللي تناسبك</p>
+      <div class="toggle" role="tablist">
+        <button class="on" data-view="cards">الباقات</button>
+        <button data-view="compare">مقارنة</button>
+      </div>
+    </div>
+
+    <div class="grid" id="cards">
+      <!-- 1 -->
+      <article class="card reveal" data-name="الباقة الأولى: تعليم" data-price="100$">
+        <div class="num en">01</div>
+        <h4>تعليم</h4>
+        <div class="price"><span class="amount en gold-text">$100</span></div>
+        <div class="meta">
+          <span class="chip">أسبوعين</span>
+          <span class="chip">4 جلسات</span>
+          <span class="chip">الجلسة من ساعة لساعة ونص</span>
+        </div>
+        <p class="desc">هعلمك فيهم تستخدم Claude صح في شغلك.</p>
+        <ul class="feats">
+          <li>إزاي تكتب طلبات تطلع نتايج كويسة</li>
+          <li>تطلع منه تقارير وشيتات وعروض جاهزة</li>
+          <li>تستخدم المشاريع علشان يبقى فاهم شغلك</li>
+          <li>Skill جاهز لأكتر مهمة بتتكرر عندك</li>
+          <li>ملف ملخص ترجعله وقت ما تحب</li>
+        </ul>
+        <button class="pick">اختار الباقة دي</button>
+      </article>
+
+      <!-- 2 -->
+      <article class="card featured reveal" data-name="الباقة التانية: تعليم + أتمتة" data-price="250$">
+        <span class="badge">الأنسب</span>
+        <div class="num en">02</div>
+        <h4>تعليم + أتمتة</h4>
+        <div class="price"><span class="amount en gold-text">$250</span></div>
+        <div class="meta">
+          <span class="chip">شهر</span>
+          <span class="chip">8 جلسات</span>
+          <span class="chip">الجلسة من ساعة ونص لساعتين</span>
+        </div>
+        <div class="inherit">كل اللي في الباقة الأولى، وكمان:</div>
+        <ul class="feats">
+          <li>هربطلك Claude بأدواتك</li>
+          <li>هجهزلك مساحة شغل خاصة بيك فيها ملفاتك وتعليماتك</li>
+          <li>Skills مخصوصين لشغلك زي عروض الأسعار أو الردود على العملاء أو التقارير</li>
+          <li>مهمة بتشتغل لوحدها كل يوم، زي ملخص الصبح بالإيميلات والمواعيد</li>
+        </ul>
+        <button class="pick">اختار الباقة دي</button>
+      </article>
+
+      <!-- 3 -->
+      <article class="card reveal" data-name="الباقة التالتة: نظام كامل" data-price="من 350$">
+        <div class="num en">03</div>
+        <h4>نظام كامل</h4>
+        <div class="price"><span class="from">من</span><span class="amount en gold-text">$350</span></div>
+        <div class="meta">
+          <span class="chip">8 أسابيع</span>
+          <span class="chip">أسبوعين دعم ومتابعة</span>
+        </div>
+        <div class="inherit">كل اللي في الباقة التانية، وكمان:</div>
+        <ul class="feats">
+          <li>هنقعد نحلل شغلك ونشوف إيه اللي ينفع يتعمل أوتوماتيك</li>
+          <li>ربط أدوات أكتر حتى اللي مش بتتربط بشكل مباشر</li>
+          <li>Skills لكل المهام المتكررة اللي هنتفق عليها</li>
+          <li>كذا مهمة بتشتغل لوحدها يومي وأسبوعي</li>
+          <li>سير شغل كامل، مثلا إيميل يوصل يتلخص ويتسجل في شيت ويتجهزله رد</li>
+          <li>ربط الـ Agents ببعضها</li>
+          <li>دليل مكتوب للنظام كله</li>
+          <li>أسبوعين دعم ومتابعة</li>
+        </ul>
+        <button class="pick">اختار الباقة دي</button>
+      </article>
+    </div>
+
+    <div class="compare" id="compare">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>تعليم<small class="en">$100</small></th>
+            <th class="col-feat">تعليم + أتمتة<small class="en">$250</small></th>
+            <th>نظام كامل<small class="en">من $350</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>المدة</td><td>أسبوعين</td><td class="col-feat">شهر</td><td>8 أسابيع</td></tr>
+          <tr><td>عدد الجلسات</td><td>4 جلسات</td><td class="col-feat">8 جلسات</td><td>—</td></tr>
+          <tr><td>مدة الجلسة</td><td>ساعة لساعة ونص</td><td class="col-feat">ساعة ونص لساعتين</td><td>—</td></tr>
+          <tr><td>تعليم استخدام Claude صح</td><td><span class="y">✓</span></td><td class="col-feat"><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>تقارير وشيتات وعروض جاهزة</td><td><span class="y">✓</span></td><td class="col-feat"><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>ملف ملخص</td><td><span class="y">✓</span></td><td class="col-feat"><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>Skills</td><td>Skill واحد</td><td class="col-feat">Skills مخصوصين لشغلك</td><td>لكل المهام المتكررة</td></tr>
+          <tr><td>ربط Claude بأدواتك</td><td><span class="n">—</span></td><td class="col-feat"><span class="y">✓</span></td><td>أدوات أكتر</td></tr>
+          <tr><td>مساحة شغل خاصة بيك</td><td><span class="n">—</span></td><td class="col-feat"><span class="y">✓</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>مهام بتشتغل لوحدها</td><td><span class="n">—</span></td><td class="col-feat">مهمة يومية</td><td>كذا مهمة يومي وأسبوعي</td></tr>
+          <tr><td>تحليل شغلك</td><td><span class="n">—</span></td><td class="col-feat"><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>سير شغل كامل</td><td><span class="n">—</span></td><td class="col-feat"><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>ربط الـ Agents ببعضها</td><td><span class="n">—</span></td><td class="col-feat"><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>دليل مكتوب للنظام</td><td><span class="n">—</span></td><td class="col-feat"><span class="n">—</span></td><td><span class="y">✓</span></td></tr>
+          <tr><td>دعم ومتابعة</td><td><span class="n">—</span></td><td class="col-feat"><span class="n">—</span></td><td>أسبوعين</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="live reveal">
+    <div class="live-dot">LIVE</div>
+    <div>
+      <h3>بنشتغل سوا live على حساب Claude بتاعك</h3>
+      <p>بتخرج من السيشن وكل حاجة مفهومة ومترتبة في حسابك، مش مجرد شرح نظري.</p>
+    </div>
+  </section>
+
+  <p class="note reveal">اشتراك Claude المدفوع بيكون <b>على حسابك</b></p>
+</div>
+
+<footer>
+  <span class="en">Eng. Rewan ElBadry</span>
+  تعليم Claude AI والأتمتة
+</footer>
+
+<div class="bar" id="bar">
+  <div class="txt"><small>اخترت</small><strong id="barName"></strong></div>
+  <button id="copyBtn">انسخ رسالة الطلب</button>
+</div>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (el.classList.contains('card') ? (i % 3) * 0.12 : 0) + 's';
+    io.observe(el);
+  });
+
+  // spotlight on cards
+  document.querySelectorAll('.card').forEach(c => {
+    c.addEventListener('mousemove', e => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // view toggle
+  const cards = document.getElementById('cards'), compare = document.getElementById('compare');
+  document.querySelectorAll('.toggle button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.toggle button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    const isCards = b.dataset.view === 'cards';
+    cards.style.display = isCards ? 'grid' : 'none';
+    compare.style.display = isCards ? 'none' : 'block';
+  }));
+
+  // selection
+  const bar = document.getElementById('bar'), barName = document.getElementById('barName');
+  let chosen = null;
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.card').forEach(x => { x.classList.remove('selected'); x.querySelector('.pick').textContent = 'اختار الباقة دي'; });
+    c.classList.add('selected');
+    c.querySelector('.pick').textContent = 'تم الاختيار ✓';
+    chosen = c;
+    barName.textContent = c.dataset.name + ' (' + c.dataset.price + ')';
+    bar.classList.add('show');
+  }));
+
+  // copy request message
+  const copyBtn = document.getElementById('copyBtn');
+  function fallbackCopy(t) {
+    const ta = document.createElement('textarea');
+    ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+  }
+  copyBtn.addEventListener('click', async () => {
+    if (!chosen) return;
+    const msg = 'أهلا، حابب أبدأ في ' + chosen.dataset.name + ' (' + chosen.dataset.price + ')';
+    try { await navigator.clipboard.writeText(msg); } catch (e) { fallbackCopy(msg); }
+    copyBtn.textContent = 'اتنسخت ✓';
+    setTimeout(() => copyBtn.textContent = 'انسخ رسالة الطلب', 1800);
+  });
+</script>
+</body>
+</html>
