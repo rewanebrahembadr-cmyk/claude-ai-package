@@ -1,4 +1,4 @@
-# Eng. Rewan ElBadry — Claude AI Packages
+# Eng. Rewan Badr — Claude AI Packages
 
 صفحة تفاعلية لباقات تعليم Claude AI والأتمتة.
 
